@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NUVIO Agent Store — Toko Digital On-Chain (Agent ID)</title>
+<meta name="description" content="Toko akun premium, akun Telegram, dan jasa sosmed di BNB Chain. Hanya pemegang Agent ID yang bisa beli. Pembayaran dikunci di kontrak escrow sampai pesanan diterima.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#">
+      <span class="brand-mark">◆</span>
+      <span class="brand-name">NUVIO <span class="brand-sub">Agent Store</span></span>
+    </a>
+    <nav class="topnav">
+      <a href="#katalog">Katalog</a>
+      <a href="#cara-kerja">Cara Kerja</a>
+      <a href="#lacak">Lacak Order</a>
+    </nav>
+    <div class="wallet-box">
+      <span id="agentBadge" class="agent-badge hidden">Agent ID ✓</span>
+      <button id="connectBtn" class="btn btn-primary">Hubungkan Wallet</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- HERO: the escrow flow is the headline -->
+  <section class="hero">
+    <p class="hero-kicker">Toko digital on-chain · BNB Chain · khusus pemegang Agent ID</p>
+    <h1>Beli akun premium.<br>Uangmu dikunci di kontrak<br>sampai akunnya diterima.</h1>
+    <p class="hero-sub">Tanpa perantara, tanpa transfer manual ke orang tak dikenal. Kamu bayar BNB atau USDT ke kontrak escrow — dana cair ke penjual hanya setelah kamu konfirmasi sudah menerima pesanan.</p>
+
+    <div class="escrow-flow" aria-label="Alur escrow">
+      <div class="flow-step">
+        <span class="flow-num">1</span>
+        <strong>Kamu bayar</strong>
+        <span>BNB / USDT masuk kontrak escrow</span>
+      </div>
+      <div class="flow-line"></div>
+      <div class="flow-step">
+        <span class="flow-num flow-lock">🔒</span>
+        <strong>Dana terkunci</strong>
+        <span>Penjual kirim akun via Telegram</span>
+      </div>
+      <div class="flow-line"></div>
+      <div class="flow-step">
+        <span class="flow-num">3</span>
+        <strong>Kamu konfirmasi</strong>
+        <span>Dana cair. Belum terima? Refund.</span>
+      </div>
+    </div>
+
+    <div class="hero-meta">
+      <span>Kontrak: <a id="contractLink" class="mono" href="#" target="_blank" rel="noopener">0x6008…A786</a></span>
+      <span id="verifyBadge" class="verify-badge">✓ Terverifikasi di BscScan</span>
+      <span id="productCountLine">Memuat katalog…</span>
+    </div>
+  </section>
+
+  <!-- CATALOGUE -->
+  <section id="katalog" class="section">
+    <div class="section-head">
+      <h2>Katalog</h2>
+      <p>Harga dibaca langsung dari kontrak — yang tampil adalah harga on-chain saat ini.</p>
+    </div>
+    <div id="gateNotice" class="gate-notice hidden">
+      <strong>Hanya pemegang Agent ID yang bisa beli.</strong>
+      <span id="gateText">Hubungkan wallet untuk memeriksa Agent ID kamu. Agent ID diklaim gratis di aplikasi Binance (Wallet → banner Agent ID).</span>
+    </div>
+    <div class="tabs" id="categoryTabs" role="tablist">
+      <button class="tab active" data-cat="Semua">Semua</button>
+      <button class="tab" data-cat="Akun Premium">Akun Premium</button>
+      <button class="tab" data-cat="Akun Telegram">Akun Telegram</button>
+      <button class="tab" data-cat="Sosmed">Sosmed</button>
+    </div>
+    <div id="productGrid" class="grid">
+      <p class="loading">Memuat produk dari BNB Chain…</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="cara-kerja" class="section">
+    <div class="section-head">
+      <h2>Cara kerja</h2>
+      <p>Tiga aturan yang melindungi pembeli — semuanya ditegakkan kontrak, bukan janji.</p>
+    </div>
+    <div class="rules">
+      <div class="rule">
+        <span class="rule-ico">🛡️</span>
+        <h3>Refund kalau tidak dikirim</h3>
+        <p>Penjual tidak mengirim dalam 7 hari? Kamu bisa klaim refund penuh dari kontrak, kapan saja setelah batas itu.</p>
+      </div>
+      <div class="rule">
+        <span class="rule-ico">⏱️</span>
+        <h3>Rilis otomatis 3 hari</h3>
+        <p>Setelah pesanan ditandai terkirim, dana cair otomatis ke penjual dalam 3 hari — kecuali kamu mengajukan refund lebih dulu.</p>
+      </div>
+      <div class="rule">
+        <span class="rule-ico">✕</span>
+        <h3>Batalkan sebelum dikirim</h3>
+        <p>Berubah pikiran sebelum pesanan dikirim? Batalkan dan dana kembali penuh ke wallet kamu.</p>
+      </div>
+    </div>
+    <ol class="steps">
+      <li><strong>Hubungkan wallet</strong> — pakai Binance Wallet (ekstensi/aplikasi). Pastikan jaringan BNB Chain dan kamu memegang Agent ID.</li>
+      <li><strong>Pilih produk &amp; bayar</strong> — BNB langsung, atau USDT (approve jumlah persis sekali, tanpa approval tanpa batas).</li>
+      <li><strong>Terima akun via Telegram</strong> — penjual menghubungi kamu lewat <a href="https://t.me/Nuvio_store_bot" target="_blank" rel="noopener">@Nuvio_store_bot</a> untuk pengiriman.</li>
+      <li><strong>Konfirmasi penerimaan</strong> — di bagian Lacak Order di bawah, setelah akun diterima dan berfungsi.</li>
+    </ol>
+  </section>
+
+  <!-- ORDER TRACKING -->
+  <section id="lacak" class="section">
+    <div class="section-head">
+      <h2>Lacak order</h2>
+      <p>Masukkan nomor order untuk melihat statusnya, atau buka order yang pernah kamu buat dari wallet ini.</p>
+    </div>
+    <div class="track-box">
+      <input id="orderIdInput" type="number" min="0" placeholder="Nomor order, contoh: 0" inputmode="numeric">
+      <button id="trackBtn" class="btn btn-primary">Lacak</button>
+    </div>
+    <div id="orderResult"></div>
+    <h3 class="my-orders-title">Order saya</h3>
+    <div id="myOrders"><p class="muted">Belum ada order dari wallet ini di perangkat ini.</p></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>
+      <strong>NUVIO Agent Store</strong>
+      <p class="muted">Toko digital on-chain untuk pemegang Binance Agent ID. Dibangun untuk Binance Agent ID Hackathon.</p>
+      <p class="muted">Kontrak escrow: <a class="mono" href="https://bscscan.com/address/0x6008c8A96E7b134228000EbdA6F51Fff6a06A786" target="_blank" rel="noopener">0x6008c8A96E7b134228000EbdA6F51Fff6a06A786</a><br>
+      Agent ID: <a class="mono" href="https://bscscan.com/address/0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F" target="_blank" rel="noopener">0x60B926…B022F</a> · USDT: <a class="mono" href="https://bscscan.com/address/0x55d398326f99059fF775485246999027B3197955" target="_blank" rel="noopener">0x55d3…7955</a><br>
+      Pengiriman &amp; bantuan: <a href="https://t.me/Nuvio_store_bot" target="_blank" rel="noopener">@Nuvio_store_bot</a></p>
+    </div>
+    <div>
+      <strong>Perhatian</strong>
+      <p class="muted">Produk digital dikirim lewat Telegram setelah pembayaran. Harga dapat berubah — harga yang berlaku adalah harga kontrak saat kamu membeli. Toko ini tidak menawarkan investasi atau imbal hasil apa pun.</p>
+      <p class="muted">Semua aksi aset (bayar, approve, konfirmasi) selalu meminta konfirmasi kamu di wallet. Jangan pernah membagikan seed phrase atau private key kepada siapa pun.</p>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" class="toast hidden" role="status"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
